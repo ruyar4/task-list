@@ -1,0 +1,19 @@
+<div class="row">
+	<% @tasks.each do |task| %>
+		<div class="col-4">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title"><%= task.name %></h4>
+					<p class="card-text"><%= task.description %></p>
+					<% if current_user.has_completed_this_task?(task) %>
+						<a href="#" class="btn btn-success disabled">Tarea Completada</a>
+						<%= link_to "Tarea No Completada", task_complete_task_path(task), class: "btn btn-danger", method: :post %>
+					<% else %>
+						<%= link_to "Completar Tarea", task_complete_task_path(task), class: "btn btn-success", method: :post %>
+					<% end %>
+					<%= link_to "Info", task, class: "btn btn-info" %>
+				</div>
+			</div>
+		</div>
+	<% end %>
+</div>
